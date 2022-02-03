@@ -1,3 +1,8 @@
+This code was originally developed at the University of Nottingham Ningbo China.
+https://unnc.digitalcommonsdata.com/datasets/c743sh73j8/1
+
+All I did was update it to be compile able with openFOAM V6 instead of V4.0.
+
 COMPILING THE SOURCE CODE
 -------------------------
 
