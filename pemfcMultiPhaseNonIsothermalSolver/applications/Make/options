@@ -1,0 +1,32 @@
+EXE_INC = \
+    -I../src/constants \
+    -I../src/createFields \
+    -I../src/createMesh \
+    -I../src/createSpecies \
+    -I../src/diffusivity \
+    -I../src/electrochemistry \
+    -I../src/energyTransport \
+    -I../src/liquidWaterTransport \
+    -I../src/mapping \
+    -I../src/momentumTransport \
+    -I../src/multiSpeciesTransport \
+    -I../src/patch \
+    -I../src/physicalProperties \
+    -I../src/readParameters \
+    -I../src/readProperties \
+    -I../src/tools/functions \
+    -I../src/tools/functionIntegration \
+    -I../src/tools/ReynoldsNumber \
+    -I../src/tools/RiddersRoot \
+    -I../src/tools/varInit \
+    -I../lib/lnInclude \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(LIB_SRC)/meshTools/lnInclude \
+    -I$(LIB_SRC)/thermophysicalModels/specie/lnInclude 
+
+EXE_LIBS = \
+    -L$(FOAM_USER_LIBBIN) \
+    -lfiniteVolume \
+    -lmeshTools \
+    -lspecie \
+    -lMultiphasePEMFC
