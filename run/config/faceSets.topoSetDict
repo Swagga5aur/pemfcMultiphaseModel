@@ -1,0 +1,276 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+// anode bipolarPlate faceSets 
+    {
+        name    abpLeftFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  abpLeft;
+        }
+    }
+    {
+        name    abpSidesFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  abpSides;
+        }
+    }
+// cathode bipolarPlate faceSets
+    {
+        name    cbpRightFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cbpRight;
+        }
+    }
+    {
+        name    cbpSidesFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cbpSides;
+        }
+    }
+// electrolyte faceSet
+    {
+        name    electrolyteSidesFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  electrolyteSides;
+        }
+    }
+// anode catalyst layer faceSet
+    {
+        name    aclSidesFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  aclSides;
+        }
+    }
+// anode gas diffusion layer faceSet
+    {
+        name    agdlSidesFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  agdlSides;
+        }
+    }
+// anodeFluid faceSets
+    {
+        name    anodeFluidSidesFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  anodeFluidSides;
+        }
+    }
+    {
+        name    anodeFluidInletFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  anodeFluidInlet;
+        }
+    }
+    {
+        name    anodeFluidOutletFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  anodeFluidOutlet;
+        }
+    }
+// cathode catalyst layer faceSet
+    {
+        name    cclSidesFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cclSides;
+        }
+    }
+// cathode gas diffusion layer faceSet
+    {
+        name    cgdlSidesFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cgdlSides;
+        }
+    }
+// cathodeFluid faceSets
+    {
+        name    cathodeFluidSidesFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cathodeFluidSides;
+        }
+    }
+    {
+        name    cathodeFluidInletFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cathodeFluidInlet;
+        }
+    }
+    {
+        name    cathodeFluidOutletFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cathodeFluidOutlet;
+        }
+    }
+// add some anodeFluid patches to abpSideFaces
+    {
+        name    abpSidesFaces;
+        type    faceSet;
+        action  add;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  anodeFluidInlet;
+        }
+    }
+    {
+        name    abpSidesFaces;
+        type    faceSet;
+        action  add;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  anodeFluidOutlet;
+        }
+    }
+    {
+        name    abpSidesFaces;
+        type    faceSet;
+        action  add;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  anodeFluidSides;
+        }
+    }
+// add some cathodeFluid patches to cbpSidesFaces
+    {
+        name    cbpSidesFaces;
+        type    faceSet;
+        action  add;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cathodeFluidInlet;
+        }
+    }
+    {
+        name    cbpSidesFaces;
+        type    faceSet;
+        action  add;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cathodeFluidOutlet;
+        }
+    }
+    {
+        name    cbpSidesFaces;
+        type    faceSet;
+        action  add;
+        source  patchToFace;
+        sourceInfo
+        {
+            name  cathodeFluidSides;
+        }
+    }
+// clear anodeFluid faceSets
+    {
+        name    anodeFluidSidesFaces;
+        type    faceSet;
+        action  clear;
+    }
+    {
+        name    anodeFluidInletFaces;
+        type    faceSet;
+        action  clear;
+    }
+    {
+        name    anodeFluidOutletFaces;
+        type    faceSet;
+        action  clear;
+    }
+
+// clear cathodeFluid faceSets
+    {
+        name    cathodeFluidSidesFaces;
+        type    faceSet;
+        action  clear;
+    }
+    {
+        name    cathodeFluidInletFaces;
+        type    faceSet;
+        action  clear;
+    }
+    {
+        name    cathodeFluidOutletFaces;
+        type    faceSet;
+        action  clear;
+    }
+);
+
+// ************************************************************************* //

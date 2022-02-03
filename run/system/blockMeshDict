@@ -1,0 +1,205 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+    class           dictionary;
+    location        "constant/polyMesh";
+    object          blockMeshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+convertToMeters 0.001;
+
+vertices
+(
+// From right to left looking down the Oz axis  
+// Cbp and Cbp_to_cathodeFluid
+    (0 0 0)				// vertex number 0
+    (1.5 0 0)				// vertex number 1
+    (0 22 0)				// vertex number 2
+    (1.5 22 0)				// vertex number 3
+    (0 0 22)				// vertex number 4
+    (1.5 0 22)				// vertex number 5
+    (0 22 22)				// vertex number 6
+    (1.5 22 22)				// vertex number 7
+// cathodeFluid_to_Cgdl
+    (3 0 0)				// vertex number 8
+    (3 22 0)				// vertex number 9
+    (3 0 22)				// vertex number 10
+    (3 22 22)				// vertex number 11
+// Cgdl_to_Ccl
+    (3.41 0 0)				// vertex number 12
+    (3.41 22 0)				// vertex number 13
+    (3.41 0 22)				// vertex number 14
+    (3.41 22 22)			// vertex number 15
+// Ccl_to_Electrolyte
+    (3.4137 0 0)			// vertex number 16
+    (3.4137 22 0)			// vertex number 17
+    (3.4137 0 22)			// vertex number 18
+    (3.4137 22 22)			// vertex number 19
+// Electrolyte_to_Acl
+    (3.5407 0 0)			// vertex number 20
+    (3.5407 22 0)			// vertex number 21
+    (3.5407 0 22)			// vertex number 22
+    (3.5407 22 22)			// vertex number 23
+// Acl_to_Agdl
+    (3.5444 0 0)			// vertex number 24
+    (3.5444 22 0)			// vertex number 25
+    (3.5444 0 22)			// vertex number 26
+    (3.5444 22 22)			// vertex number 27
+// Agdl_to_anodeFluid
+    (3.9544 0 0)			// vertex number 28
+    (3.9544 22 0)			// vertex number 29
+    (3.9544 0 22)			// vertex number 30
+    (3.9544 22 22)			// vertex number 31
+// anodeFluid_to_Abp
+    (5.4544 0 0)			// vertex number 32
+    (5.4544 22 0)			// vertex number 33
+    (5.4544 0 22)			// vertex number 34
+    (5.4544 22 22)			// vertex number 35
+// Abp
+    (6.9544 0 0)			// vertex number 36
+    (6.9544 22 0)			// vertex number 37
+    (6.9544 0 22)			// vertex number 38
+    (6.9544 22 22)			// vertex number 39
+);
+
+blocks          
+(
+// From right to left looking down the Oz axis
+// cathode bipolar plate
+    hex (  0   1   3   2   4   5   7   6) (15 44 22) simpleGrading (1 1 1)
+// cathodeFluid
+    hex (  1   8   9   3   5   10  11  7) (30 44 22) simpleGrading (1 1 1)
+// cathode gas diffusion layer
+    hex (  8   12  13  9  10  14  15  11) (20 44 22) simpleGrading (1 1 1)
+// cathode catalyst layer
+    hex ( 12  16  17  13  14  18  19  15) ( 2 44 22) simpleGrading (1 1 1)
+// electrolyte
+    hex ( 16  20  21  17  18  22  23  19) ( 5 44 22) simpleGrading (1 1 1)
+// anode catalyst layer
+    hex ( 20  24  25  21  22  26  27  23) ( 2 44 22) simpleGrading (1 1 1)
+// anode gas diffusion layer
+    hex ( 24  28  29  25  26  30  31  27) (20 44 22) simpleGrading (1 1 1)
+// anodeFluid
+    hex ( 28  32  33  29  30  34  35  31) (30 44 22) simpleGrading (1 1 1)
+// anode bipolar plate
+    hex ( 32  36  37  33  34  38  39  35) (15 44 22) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+patches
+( 
+// From right to left looking down the Oz axis
+// cathode bipolar plate
+    patch cbpRight
+    (
+        (  0   4   6   2)
+    )
+    patch cbpSides
+    (
+        (  0   1   5   4)
+        (  2   3   7   6)
+        (  0   2   3   1)
+        (  4   5   7   6)
+    )
+// cathodeFluid
+    patch cathodeFluidInlet
+    (
+        (  1   3   9   8)
+    )
+        patch cathodeFluidOutlet
+    (
+        (  5  10  11   7)
+    )
+    patch cathodeFluidSides
+    (
+        (  1   8  10   5)
+        (  3   7  11   9)
+    )
+// cathode gas diffusion layer
+    patch cgdlSides
+    (
+        (  8  12  14  10)
+        (  9  11  15  13)
+        (  8   9  13  12)
+        ( 10  14  15  11)
+    )
+// cathode catalyst layer
+    patch cclSides
+    (
+        ( 12  16  18  14)
+        ( 13  15  19  17)
+        ( 12  13  17  16)
+        ( 14  18  19  15)
+    )
+// Electrolyte
+    patch electrolyteSides
+    (
+        ( 16  20  22  18)
+        ( 17  19  23  21)
+        ( 16  17  21  20)
+        ( 18  22  23  19)
+    )
+// anode catalyst layer
+    patch aclSides
+    (
+        ( 20  24  26  22)
+        ( 21  23  27  25)
+        ( 20  21  25  24)
+        ( 22  26  27  23)
+    )
+// anode gas diffusion layer
+    patch agdlSides
+    (
+        ( 24  28  30  26)
+        ( 25  27  31  29)
+        ( 24  25  29  28)
+        ( 26  30  31  27)
+    )
+// anodeFluid
+    patch anodeFluidInlet
+    (
+        ( 28  29  33  32)
+    )
+        patch anodeFluidOutlet
+    (
+        ( 30  34  35  31)
+    )
+    patch anodeFluidSides
+    (
+        ( 28  32  34  30)
+        ( 29  31  35  33)
+    )
+// anode bipolar plate
+    patch abpSides
+    (
+        ( 32  33  37  36)
+        ( 34  38  39  35)
+        ( 32  36  38  34)
+        ( 33  35  39  37)
+    )
+    patch abpLeft
+    (
+        ( 36  37  39  38)
+    )
+);
+
+mergePatchPairs
+(
+);
+
+
+// ************************************************************************* //

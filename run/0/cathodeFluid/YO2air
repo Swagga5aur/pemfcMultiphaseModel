@@ -1,0 +1,62 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0/cathodeFluid";
+    object      YO2air;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform 0.20;
+
+boundaryField
+{
+    cathodeFluidInlet
+    {
+        type            fixedValue;
+        value           $internalField;
+    }
+
+    cathodeFluidOutlet
+    {
+        type            zeroGradient;
+    }
+
+    cathodeFluidSides
+    {
+        type            zeroGradient;
+    }
+
+    cgdlSides
+    {
+        type            zeroGradient;
+    }
+    
+    cclSides
+    {
+        type            zeroGradient;
+    }
+    
+    cathodeFluid_to_electrolyte //cathode
+    {
+        type            fixedGradient;
+        gradient        uniform 0;
+    }
+    
+    cathodeFluid_to_cbp
+    {
+        type            zeroGradient;
+    }
+}
+
+// ************************************************************************* //

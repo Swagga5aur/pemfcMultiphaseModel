@@ -1,0 +1,178 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    // cathodeFluid region cellSet
+    {
+        name    cgdlCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3e-03 0 0)(3.41e-03 22e-03 22e-03); // vertex 8 vertex 15
+    }
+    }
+        {
+        name    cclCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.41e-03 0 0)(3.4137e-03 22e-03 22e-03); // vertex 12 vertex 19
+        }
+    }
+    {
+        name    cgfcCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (1.5e-03 1e-03 0)(3e-03 3e-03 22e-03); // channel 1
+        }
+    }
+    {
+        name    cgfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (1.5e-03 4e-03 0)(3e-03 6e-03 22e-03); // channel 2
+        }
+    }
+    {
+        name    cgfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (1.5e-03 7e-03 0)(3e-03 9e-03 22e-03); // channel 3
+        }
+    }
+    {
+        name    cgfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (1.5e-03 10e-03 0)(3e-03 12e-03 22e-03); // channel 4
+        }
+    }
+    {
+        name    cgfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (1.5e-03 13e-03 0)(3e-03 15e-03 22e-03); // channel 5
+        }
+    }
+    {
+        name    cgfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (1.5e-03 16e-03 0)(3e-03 18e-03 22e-03); // channel 6
+        }
+    }
+    {
+        name    cgfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (1.5e-03 19e-03 0)(3e-03 21e-03 22e-03); // channel 7
+        }
+    }
+
+    // cathode fluid region cellZoneSet
+    {
+        name    cathodeFluid;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set cgdlCells;
+        }
+    }
+    {
+        name    cathodeFluid;
+        type    cellZoneSet;
+        action  add;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set cclCells;
+        }
+    }
+    {
+        name    cathodeFluid;
+        type    cellZoneSet;
+        action  add;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set cgfcCells;
+        }
+    }
+    // cathode gas diffusion layer cellZoneSet
+    {
+        name    cgdl;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set cgdlCells;
+        }
+    }
+    // cathode catalyst layer cellZone
+    {
+        name    ccl;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set cclCells;
+        }
+    }
+    // cathode gas flow channels cellZoneSet
+    {
+        name    cgfc;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set cgfcCells;
+        }
+    }
+);
+
+// ************************************************************************* //

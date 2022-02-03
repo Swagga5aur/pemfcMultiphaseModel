@@ -1,0 +1,165 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Put the faces that separate regions into a faceSet iFaces
+// regions:
+           // cbp
+           // cathodeFluid
+           // electrolyte
+           // anodeFluid
+           // abp
+
+actions
+(
+// interface faces
+// ---------------
+    // begin with cbp/cathodeFluid interface
+    {
+        name    iFaces;
+        type    faceSet;
+        action  new;
+        source  cellToFace;
+        sourceInfo
+        {
+            set    cbpCells;
+            option all;
+        }
+    }
+    {
+        name    iFaces;
+        type    faceSet;
+        action  subset;
+        source  cellToFace;
+        sourceInfo
+        {
+            set    cgfcCells;
+            option all;
+        }
+    }
+    // add cathodeFluid/electrolyte interface
+    {
+        name    aFaces;
+        type    faceSet;
+        action  new;
+        source  cellToFace;
+        sourceInfo
+        {
+            set    cclCells;
+            option all;
+        }
+    }
+    {
+        name    aFaces;
+        type    faceSet;
+        action  subset;
+        source  cellToFace;
+        sourceInfo
+        {
+            set    electrolyteCells;
+            option all;
+        }
+    }
+    {
+        name    iFaces;
+        type    faceSet;
+        action  add;
+        source  faceToFace;
+        sourceInfo
+        {
+            set    aFaces;
+        }
+    }
+    // add electrolyte/anodeFluid interface
+    {
+        name    bFaces;
+        type    faceSet;
+        action  new;
+        source  cellToFace;
+        sourceInfo
+        {
+            set    electrolyteCells;
+            option all;
+        }
+    }
+    {
+        name    bFaces;
+        type    faceSet;
+        action  subset;
+        source  cellToFace;
+        sourceInfo
+        {
+            set    aclCells;
+            option all;
+        }
+    }
+    {
+        name    iFaces;
+        type    faceSet;
+        action  add;
+        source  faceToFace;
+        sourceInfo
+        {
+            set    bFaces;
+        }
+    }
+    // add anodeFluid/abp interface
+    {
+        name    cFaces;
+        type    faceSet;
+        action  new;
+        source  cellToFace;
+        sourceInfo
+        {
+            set    agfcCells;
+            option all;
+        }
+    }
+    {
+        name    cFaces;
+        type    faceSet;
+        action  subset;
+        source  cellToFace;
+        sourceInfo
+        {
+            set    abpCells;
+            option all;
+        }
+    }
+    {
+        name    iFaces;
+        type    faceSet;
+        action  add;
+        source  faceToFace;
+        sourceInfo
+        {
+            set    cFaces;
+        }
+    }
+    // anode fluid region cellZoneSet
+    {
+        name    iFaces;
+        type    faceZoneSet;
+        action  new;
+        source  setToFaceZone;
+        sourceInfo
+        {
+            faceSet iFaces;
+        }
+    }
+);
+
+// *********************************************************************** //

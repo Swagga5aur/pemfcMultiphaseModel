@@ -1,0 +1,102 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      T;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 1 0 0 0];
+
+internalField   uniform 353.0; // 79.85degC
+
+boundaryField
+{
+    abpLeft
+    {
+        type            zeroGradient;    
+    }
+
+    abpSides
+    {
+        type            zeroGradient;
+    }
+        
+    anodeFluidInlet
+    {
+        type            fixedValue;
+        value           $internalField;
+    }
+
+    anodeFluidOutlet
+    {
+        type            zeroGradient;
+    }
+
+    anodeFluidSides
+    {
+        type            zeroGradient;
+    } 
+   
+    agdlSides
+    {
+        type            zeroGradient;
+    }
+
+    aclSides
+    {
+        type            zeroGradient;
+    } 
+
+    electrolyteSides
+    {
+        type            zeroGradient;
+    } 
+
+    cclSides
+    {
+        type            zeroGradient;
+    }
+
+    cgdlSides
+    {
+        type            zeroGradient;
+    }
+
+    cathodeFluidInlet
+    {
+        type            fixedValue;
+        value           $internalField;
+    }
+
+    cathodeFluidOutlet
+    {
+        type            zeroGradient;
+    }
+
+    cathodeFluidSides
+    {
+        type            zeroGradient;
+    } 
+         
+    cbpSides
+    {
+        type            zeroGradient;
+    }
+
+    cbpRight
+    {
+        type            zeroGradient;    
+    }
+}
+
+// ************************************************************************* //

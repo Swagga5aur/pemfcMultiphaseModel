@@ -1,0 +1,90 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system/anodeFluid";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p
+    {
+        solver           PCG;
+        preconditioner   DIC;
+        tolerance        1e-09;
+        relTol           0.0;
+        minIter          1;
+        maxIter          700;
+    }
+
+    S
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-09;
+        relTol           0.0;
+        minIter          1;
+        maxIter          1000;
+    }
+
+    U
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-09;
+        relTol           0.0;
+        minIter          1;
+        maxIter          700;
+    }
+
+    Yi
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-09;
+        relTol           0.0;
+        minIter          1;
+        maxIter          1000;
+    }
+
+    yH2
+    {
+        solver           PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-09;
+        relTol           0.0;
+        minIter          1;
+        maxIter          1000;
+    }
+}
+
+PISO
+{
+    nIteration                 0;
+    nCorrectors                2;
+    nNonOrthogonalCorrectors   0;
+    pRefCell                   0;
+    pRefValue                  0;
+}
+
+relaxationFactors
+{
+    p           0.3;
+    S           0.5;
+    U           0.7;
+    yH2fuel     0.5;
+    yH2Ofuel    0.5;
+    yN2fuel     0.5;
+}
+
+// ************************************************************************* //

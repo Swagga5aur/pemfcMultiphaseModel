@@ -1,0 +1,62 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0/anodeFluid";
+    object      diffH2fuel;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -1 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    anodeFluidInlet
+    {
+        type          fixedValue;
+        value         uniform 1.0e-15;    //disallow outward diffusion at inlet
+                                        // value 0 causes harmonic averaging FPE
+    }
+
+    anodeFluidOutlet
+    {
+        type          zeroGradient;
+    }
+
+    anodeFluidSides
+    {
+        type          zeroGradient;
+    }
+
+    agdlSides
+    {
+        type          zeroGradient;
+    }
+
+    aclSides
+    {
+        type          zeroGradient;
+    }
+
+    anodeFluid_to_electrolyte
+    {
+        type          zeroGradient;
+    }
+
+    anodeFluid_to_abp
+    {
+        type          zeroGradient;
+    }
+}
+
+// ************************************************************************* //

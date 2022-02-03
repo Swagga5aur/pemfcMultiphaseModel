@@ -1,0 +1,178 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+   // anode fluid region cellSet
+    {
+        name    aclCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.5407e-03 0 0)(3.5444e-03 22e-03 22e-03); // vertex 20 vertex 27
+        }
+    }
+    {
+        name    agdlCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.5444e-03 0 0)(3.9544e-03 22e-03 22e-03); // vertex 24 vertex 31
+        }
+    }
+    {
+        name    agfcCells;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.9544e-03 1e-03 0)(5.4544e-03 3e-03 22e-03); // channel 1
+        }
+    }
+    {
+        name    agfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.9544e-03 4e-03 0)(5.4544e-03 6e-03 22e-03); // channel 2
+        }
+    }
+    {
+        name    agfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.9544e-03 7e-03 0)(5.4544e-03 9e-03 22e-03); // channel 3
+        }
+    }
+    {
+        name    agfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.9544e-03 10e-03 0)(5.4544e-03 12e-03 22e-03); // channel 4
+        }
+    }
+    {
+        name    agfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.9544e-03 13e-03 0)(5.4544e-03 15e-03 22e-03); // channel 5
+        }
+    }
+    {
+        name    agfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.9544e-03 16e-03 0)(5.4544e-03 18e-03 22e-03); // channel 6
+        }
+    }
+    {
+        name    agfcCells;
+        type    cellSet;
+        action  add;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (3.9544e-03 19e-03 0)(5.4544e-03 21e-03 22e-03); // channel 7
+        }
+    }
+
+    // anode fluid region cellZoneSet
+    {
+        name    anodeFluid;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set aclCells;
+        }
+    }
+    {
+        name    anodeFluid;
+        type    cellZoneSet;
+        action  add;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set agdlCells;
+        }
+    }
+    {
+        name    anodeFluid;
+        type    cellZoneSet;
+        action  add;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set agfcCells;
+        }
+    }
+    // anode catalyst layer cellZoneSet
+    {
+        name    acl;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set aclCells;
+        }
+    }
+    // anode gas diffusion layer cellZoneSet
+    {
+        name    agdl;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set agdlCells;
+        }
+    }
+    // anode gas flow channels cellZoneSet
+    {
+        name    agfc;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set agfcCells;
+        }
+    }
+);
+
+// ************************************************************************* //

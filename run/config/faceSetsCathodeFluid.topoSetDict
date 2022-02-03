@@ -1,0 +1,186 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    // inlet
+    {
+        name    cathodeFluidInletFaces;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 1e-03 -1e-06)(3e-03 3e-03 1e-06); // channel 1 inlet
+        }
+    }
+    {
+        name    cathodeFluidInletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 4e-03 -1e-06)(3e-03 6e-03 1e-06); // channel 2 inlet
+        }
+    }
+    {
+        name    cathodeFluidInletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 7e-03 -1e-06)(3e-03 9e-03 1e-06); // channel 3 inlet
+        }
+    }
+    {
+        name    cathodeFluidInletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 10e-03 -1e-06)(3e-03 12e-03 1e-06); // channel 4 inlet
+        }
+    }
+    {
+        name    cathodeFluidInletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 13e-03 -1e-06)(3e-03 15e-03 1e-06); // channel 5 inlet
+        }
+    }
+    {
+        name    cathodeFluidInletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 16e-03 -1e-06)(3e-03 18e-03 1e-06); // channel 6 inlet
+        }
+    }
+    {
+        name    cathodeFluidInletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 19e-03 -1e-06)(3e-03 21e-03 1e-06); // channel 7 inlet
+        }
+    }
+
+    // outlet
+    {
+        name    cathodeFluidOutletFaces;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 1e-03 21.999e-03)(3e-03 3e-03 22.001e-03); //channel 1 outlet
+        }
+    }
+    {
+        name    cathodeFluidOutletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 4e-03 21.999e-03)(3e-03 6e-03 22.001e-03); //channel 2 outlet
+        }
+    }
+    {
+        name    cathodeFluidOutletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 7e-03 21.999e-03)(3e-03 9e-03 22.001e-03); //channel 3 outlet
+        }
+    }
+    {
+        name    cathodeFluidOutletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 10e-03 21.999e-03)(3e-03 12e-03 22.001e-03); //channel 4 outlet
+        }
+    }
+    {
+        name    cathodeFluidOutletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 13e-03 21.999e-03)(3e-03 15e-03 22.001e-03); //channel 5 outlet
+        }
+    }
+    {
+        name    cathodeFluidOutletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 16e-03 21.999e-03)(3e-03 18e-03 22.001e-03); //channel 6 outlet
+        }
+    }
+    {
+        name    cathodeFluidOutletFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (1.5e-03 19e-03 21.999e-03)(3e-03 21e-03 22.001e-03); //channel 7 outlet
+        }
+    }
+
+    {
+        name    cbpSidesFaces;
+        type    faceSet;
+        action  delete;
+        source  faceToFace;
+        sourceInfo
+        {
+            set cathodeFluidInletFaces;
+        }
+    }
+    {
+        name    cbpSidesFaces;
+        type    faceSet;
+        action  delete;
+        source  faceToFace;
+        sourceInfo
+        {
+            set cathodeFluidOutletFaces;
+        }
+    }
+);
+
+// ************************************************************************* //

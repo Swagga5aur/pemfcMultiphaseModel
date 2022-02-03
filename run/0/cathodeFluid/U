@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0/cathodeFluid";
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+boundaryField
+{
+
+    cathodeFluidInlet
+    {
+        type            fixedValue;
+        value           uniform (0 0 2.1134);
+    }
+
+    cathodeFluidOutlet
+    {
+        type            zeroGradient;
+    }
+
+    cathodeFluidSides
+    {
+       type            fixedValue;
+       value           uniform (0 0 0);
+    }
+    
+    cgdlSides
+    {
+       type            fixedValue;
+       value           uniform (0 0 0);
+    }
+        
+    cclSides
+    {
+       type            fixedValue;
+       value           uniform (0 0 0);
+    }
+            
+    cathodeFluid_to_electrolyte //cathode
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    
+    cathodeFluid_to_cbp
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+}
+
+// ************************************************************************* //

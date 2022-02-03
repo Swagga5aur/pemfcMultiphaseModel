@@ -1,0 +1,114 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      cellProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// V=1.0   @ i=5
+// V=0.95  @ i=25
+// V=0.9   @ i=100
+// V=0.85  @ i=500
+// V=0.8   @ i=1000
+// V=0.78  @ i=2000
+// V=0.74  @ i=3000
+// V=0.7   @ i=4000
+// V=0.65  @ i=5000
+// V=0.6   @ i=6000
+// V=0.58  @ i=7000
+// V=0.54  @ i=8000
+// V=0.5   @ i=9000
+// V=0.48  @ i=10000
+// V=0.44  @ i=11000
+// V=0.4   @ i=12000
+// V=0.38  @ i=13000
+// V=0.34  @ i=14000
+// V=0.3   @ i=15000
+// V=0.25  @ i=16000
+
+// run mode
+// true ==> galvanostatic
+// false ==> potentiostatic
+//
+galvanostatic true;
+
+// voltage
+// galvanostatic ==> initial value
+// potentiostatic ==> prescribed value
+//
+voltage          V           [1 2 -3 0 0 -1 0]      0.6; // volts
+
+// mean current density
+// galvanostatic ==> prescribed value
+// potentiostatic ==> initial value
+//
+Ibar0            Ibar0       [0 -2 0 0 0 1 0]     6000.0; // amperes/m^2
+
+// available anodeFluid cell types: PEMFC
+fuelCellType     PEMFC;
+
+// voltage correction relaxation coefficient for galvanostatic run
+//
+Rhat             Rhat        [1 4 -3 0 0 -2 0]    1.0e-5; // ohm m^2
+Rhat0            Rhat0       [1 4 -3 0 0 -2 0]    1.0e-5; // ohm m^2, relaxation 
+
+// initial Temperature for anodeFluid and cathodeFluid T fields
+Tinit		 Tinit       [0 0 0 1 0 0 0]       353.0; // K
+numCells	 numCells    [0 0 0 0 0 0 0]           1; // K
+
+// components electronic conductivity - Siemens per meter (S/m)
+kappaCl          kappaCl     [-1 -2 3 0 0 2 0]     1.0e+3;
+kappaGdl         kappaGdl    [-1 -2 3 0 0 2 0]     5.0e+3;
+kappaBp          kappaBp     [-1 -2 3 0 0 2 0]     8.3e+4;
+
+// contact resistance (GDL - BP)
+rContact         rContact    [1 4 -3 0 0 -2 0]    2.0e-6; //ohm*m^2
+
+// components thickness (m) 
+tCl              tCl         [0 1 0 0 0 0 0]      3.7e-6;
+tGdl             tGdl        [0 1 0 0 0 0 0]      4.1e-4;
+tBp              tBp         [0 1 0 0 0 0 0]      3.0e-3;
+
+// components porosity
+epsilonGdl       epsilonGdl  [0 0 0 0 0 0 0]         0.5; // typical
+epsilonCl        epsilonCl   [0 0 0 0 0 0 0]         0.4; // typical
+
+// concentration overpotential constant
+etaConCaConstant etaConCaConstant [0 0 0 0 0 0 0]    0.25; // typical, O'Hayre(2006) p.149
+
+// liquid water transport
+condensationRateConstant              condensationRateConstant              [0  0  0 0 0 0 0]      10.0; // s^-1
+phaseChangeEnthalpySourceCoefficient  phaseChangeEnthalpySourceCoefficient  [0  0  0 0 0 0 0]    1.0e-1;
+surfaceTension                        surfaceTension                        [1  0  -2 0 0 0 0]   0.0625; // N/m
+contactAngle                          contactAngle                          [0  0  0 0 0 0 0]     120.0; // Deg
+absolutePermeability                  absolutePermeability                  [0  2  0 0 0 0 0]  5.20e-11; // Acosta et al (2006)
+
+// special patch names
+anodeFluidInletPatch         anodeFluidInlet;
+anodeFluidOutletPatch        anodeFluidOutlet;
+anodePatch                   anodeFluid_to_electrolyte;
+anodeFluidAbpPatch           anodeFluid_to_abp;
+
+cathodeFluidInletPatch       cathodeFluidInlet;
+cathodeFluidOutletPatch      cathodeFluidOutlet;
+cathodePatch                 cathodeFluid_to_electrolyte;
+cathodeFluidCbpPatch         cathodeFluid_to_cbp;
+
+electrolyteAnodePatch        electrolyte_to_anodeFluid;
+electrolyteCathodePatch      electrolyte_to_cathodeFluid;
+
+abpAnodeFluidPatch           abp_to_anodeFluid;
+cbpCathodeFluidPatch         cbp_to_cathodeFluid;
+
+// ************************************************************************* //
+
