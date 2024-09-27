@@ -26,13 +26,14 @@
             volScalarField& Yi = Yair[i];
             volScalarField& diffAirS = diffSpAir[i];
 
-            solve
+            fvScalarMatrix YiEqn
             (
                 fvm::ddt(rhoAir, Yi)
               + yConvection->fvmDiv(phiAir, Yi)
-              - fvm::laplacian(rhoAir*diffAirS, Yi, "laplacian(diff,y)"),
-                cathodeFluidMesh.solver("Yi")
+              - fvm::laplacian(rhoAir*diffAirS, Yi, "laplacian(diff,y)")
             );
+            YiEqn.relax();
+            YiEqn.solve("Yi");
 
             //Yi.max(0.0);
             Yi.max(Foam::doubleScalarSmall);

@@ -7,13 +7,13 @@
     const polyPatch& electrolyteAnodePatch = electrolyteMesh.boundaryMesh()[electrolyteAnodeID];
     const polyPatch& electrolyteCathodePatch = electrolyteMesh.boundaryMesh()[electrolyteCathodeID];
 
-    myPatchToPatchInterpolation anodeToCathode
+    mypatchToPatchInterpolation anodeToCathode
     (
         anodePatch,
         cathodePatch
     );
 
-    myPatchToPatchInterpolation cathodeToAnode
+    mypatchToPatchInterpolation cathodeToAnode
     (
         cathodePatch,
         anodePatch
@@ -55,13 +55,13 @@
     // Ohmic heating will occur in the electrolyte
     // Interpolation is no longer required (R.Nishida, 01.04.2014)
 
-    myPatchToPatchInterpolation anodeFluidAnodeToElectrolyteAnode
+    mypatchToPatchInterpolation anodeFluidAnodeToElectrolyteAnode
     (
         anodeFluidMesh.boundaryMesh()[anodeID],
         electrolyteMesh.boundaryMesh()[electrolyteAnodeID]
     );
 
-    myPatchToPatchInterpolation cathodeFluidCathodeToElectrolyteCathode
+    mypatchToPatchInterpolation cathodeFluidCathodeToElectrolyteCathode
     (
         cathodeFluidMesh.boundaryMesh()[cathodeID],
         electrolyteMesh.boundaryMesh()[electrolyteCathodeID]

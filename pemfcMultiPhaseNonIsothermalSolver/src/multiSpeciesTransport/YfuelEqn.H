@@ -27,13 +27,14 @@
             volScalarField& Yi = Yfuel[i];
             volScalarField& diffFuelS = diffSpFuel[i];
 
-            solve
+            fvScalarMatrix YiEqn
             (
                 fvm::ddt(rhoFuel, Yi)
               + yConvection->fvmDiv(phiFuel, Yi)
-              - fvm::laplacian(rhoFuel*diffFuelS, Yi, "laplacian(diff,y)"),
-                anodeFluidMesh.solver("Yi")
+              - fvm::laplacian(rhoFuel*diffFuelS, Yi, "laplacian(diff,y)")
             );
+            YiEqn.relax();
+            YiEqn.solve("Yi");
  
             //Yi.max(0.0);
             Yi.max(Foam::doubleScalarSmall);
