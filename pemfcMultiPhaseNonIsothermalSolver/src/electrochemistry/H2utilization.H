@@ -62,8 +62,8 @@
 
             scalar rateElecI = Foam::gSum
             (
-            	cathodeToAnode.faceInterpolate(mflux[I])
-                *anodeFluidMesh.magSf().boundaryField()[anodeID]
+		cathodeToAnode.faceInterpolate(mflux[I])
+		*anodeFluidMesh.magSf().boundaryField()[anodeID]
             );
 
             Info<< fuelSpecies[I].name() << " mass rates: " << nl;

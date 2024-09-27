@@ -72,11 +72,9 @@
             );
 
             xFuel[s] =
-                 anodeToCathode.faceInterpolate
-                 (
-                     Yfuel[s].boundaryFieldRef()[anodeID]/fuelSpecies[s].MW()
-                     /sumFYjOnMj
-                 );
+            (
+                Xfuel[s].boundaryFieldRef()[anodeID]
+            );
 
             // ensure positivity
             xFuel[s] = Foam::max(xFuel[s], Foam::doubleScalarSmall);
