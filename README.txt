@@ -14,3 +14,5 @@ This should generate the shared object library "libMultiphasePEMFC.so" in the "$
 and application executable "pemfcMultiphaseNonIsothermalSolver" in the "$FOAM_USER_APPBIN" directory. 
 
 A "lnInclude/" directory, containing links to all the lib class files, will appear in the "lib/" directory.
+
+Note I haven't compiled it recently and don't have a V6 openFOAM compiled for testing, will look into in the future perhaps. The V7 of the code is compiling fine atleast.
